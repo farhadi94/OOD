@@ -5,8 +5,12 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -14,8 +18,11 @@ import javax.persistence.OneToOne;
 public class Student {
 	
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private long id;
+	
 	@OneToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="userId")
+	@JoinColumn(name="user")
 	private User user;
 	
 	@OneToMany(mappedBy="student")
@@ -23,6 +30,12 @@ public class Student {
 	
 	@Column(unique=true)
 	private Long studentId;
+	
+	@ManyToMany(mappedBy="students")
+	private List<CourseGroup> courseGroups;
+	
+	@OneToMany(mappedBy="student")
+	private List<ExamGrade> examGrades;
 	
 	private Long depNo;
 	
