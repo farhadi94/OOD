@@ -20,6 +20,10 @@ public class RegisteryManager {
 
 	@RequestMapping(value="/login", method=RequestMethod.GET)
 	public String loginForm(Model model) {
+		User user=new User();
+		user.setUsername("hi");
+		user.setPassword("bye");
+		repository.save(user);
 		model.addAttribute("loginFormFields", new LoginFormFields());
 		return "login";
 	}
