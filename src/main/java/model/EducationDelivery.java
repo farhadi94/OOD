@@ -12,7 +12,7 @@ import javax.persistence.OneToMany;
 
 @Entity
 @DiscriminatorValue("d")
-public class EducationDelivery {
+public class EducationDelivery extends Gradable{
 	
 //	@Id
 //	@GeneratedValue(strategy=GenerationType.AUTO)

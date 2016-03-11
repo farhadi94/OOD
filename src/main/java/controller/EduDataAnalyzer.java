@@ -10,12 +10,26 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class EduDataAnalyzer {
 	
 	private static EduDataAnalyzer instance = null;
 	
-	private EduDataAnalyzer() {}
+	@Autowired
+	private UserDao userDao;
+	
+	public UserDao getUserDao() {
+		return userDao;
+	}
+
+	public void setUserDao(UserDao userDao) {
+		this.userDao = userDao;
+	}
+
+	public EduDataAnalyzer() {}
 	
 	public static EduDataAnalyzer getInstance() {
 		if (instance == null)
@@ -28,6 +42,8 @@ public class EduDataAnalyzer {
 		for (EduData eduData: eduDatas)
 			if (eduData.validateAndInsert() == false)
 				System.err.println("Invalid data");
+		System.err.println("COUNT: " + userDao.count());
+
 	}
 	
 	private ArrayList<EduData> parseEduData(File file){
