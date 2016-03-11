@@ -13,7 +13,24 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class EduDataAnalyzer {
 	
-	public ArrayList<EduData> parseEduData(File file){
+	private static EduDataAnalyzer instance = null;
+	
+	private EduDataAnalyzer() {}
+	
+	public static EduDataAnalyzer getInstance() {
+		if (instance == null)
+			instance = new EduDataAnalyzer();
+		return instance;
+	}
+	
+	public void parseAndInsertNewData(File file){
+		ArrayList<EduData> eduDatas = parseEduData(file); 
+		for (EduData eduData: eduDatas)
+			if (eduData.validateAndInsert() == false)
+				System.err.println("Invalid data");
+	}
+	
+	private ArrayList<EduData> parseEduData(File file){
 		ArrayList<EduData> eduDatas = new ArrayList<EduData>();
 		try{
 			Workbook wb = new XSSFWorkbook(file);
@@ -21,9 +38,6 @@ public class EduDataAnalyzer {
 			eduDatas.addAll(parseLecturersSheet(wb.cloneSheet(1), 1));
 			eduDatas.addAll(parseCLMappingSheet(wb.cloneSheet(2), 2));
 			eduDatas.addAll(parseSCMappingSheet(wb.cloneSheet(3), 3));
-			for (EduData eduData: eduDatas)
-				if (eduData.validateAndInsert() == false)
-					System.err.println("Invalid data");
 			wb.close();
 		}catch (Exception e){
 			e.printStackTrace();
