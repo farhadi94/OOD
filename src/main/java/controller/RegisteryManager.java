@@ -3,12 +3,9 @@ package main.java.controller;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 
-import main.java.model.User;
-import main.java.model.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,7 +25,7 @@ public class RegisteryManager {
 		return "login";
 	}
 	@Autowired
-	UserRepository repository;
+	UserDao repository;
 
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public String loginSubmit(HttpServletResponse response, @RequestParam("user") String user,@RequestParam("pass") String pass, Model model) {
