@@ -1,0 +1,24 @@
+th
+{
+	text-align: right;
+}
+.selected
+{
+	background-color: #CCE;
+}
+.mail-read
+{
+	background-color: #BBB;
+}
+.rating .filled
+{
+	color: #ffeb44;
+}
+.rating
+{
+	font-size: 180%;
+}
+table a
+{
+	color: inherit;
+}
