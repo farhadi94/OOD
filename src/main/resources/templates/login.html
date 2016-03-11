@@ -21,19 +21,19 @@
 
 <div class="container">
 
-    <form class="form-signin" method="post">
+    <form class="form-signin" method="POST" action="login.html">
         <h2 class="form-signin-heading">ورود به سامانه</h2>
         <label for="inputEmail" class="sr-only">نام کاربری</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="نام کاربری" required="required" autofocus="autofocus"/>
+        <input type="email" name="user" id="inputEmail" class="form-control" placeholder="نام کاربری" required="required" autofocus="autofocus"/>
         <label for="inputPassword" class="sr-only">رمز عبور</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="رمز عبور" required="required"/>
+        <input type="password" name="pass" id="inputPassword" class="form-control" placeholder="رمز عبور" required="required"/>
         <div class="checkbox">
 
             <input type="checkbox" value="remember-me"/>
             <label style="margin-right: 20px;"> من رو یادت باشه :))
             </label>
         </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">ورود</button>
+        <input type='submit' value='ورود'/>
     </form>
 
 </div> <!-- /container -->

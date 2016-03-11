@@ -1,22 +1,22 @@
 package main.java.controller;
 
 public class LoginFormFields{
-	private String username;
-	private String password;
+	private String user;
+	private String pass;
 	
 	public LoginFormFields() {
 	}
 	
 	public String getUsername() {
-		return username;
+		return user;
 	}
 	public void setUsername(String username) {
-		this.username = username;
+		this.user = username;
 	}
 	public String getPassword() {
-		return password;
+		return pass;
 	}
 	public void setPassword(String password) {
-		this.password = password;
+		this.pass = password;
 	}
 }
