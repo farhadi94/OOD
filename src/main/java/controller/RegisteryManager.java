@@ -3,26 +3,37 @@ package main.java.controller;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 @Controller
 public class RegisteryManager {
 
 	@RequestMapping(value="/login", method=RequestMethod.GET)
 	public String loginForm(Model model) {
+		User user=new User();
+		user.setUsername("hi");
+		user.setPassword("bye");
+		repository.save(user);
 		model.addAttribute("loginFormFields", new LoginFormFields());
 		return "login";
 	}
-	
+	@Autowired
+	UserDao repository;
+
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public String loginSubmit(HttpServletResponse response, @ModelAttribute LoginFormFields loginFormFields, Model model) {
-		//FIXME add correct authentication
-		if (true){
-			response.addCookie(new Cookie("username", loginFormFields.getUsername()));
+	public String loginSubmit(HttpServletResponse response, @RequestParam("user") String user,@RequestParam("pass") String pass, Model model) {
+		List<User> users=repository.findByUsername(user);
+		if (users.size()>0 && users.get(0).getPassword().equals(pass)){
+			response.addCookie(new Cookie("username", user));
+			model.addAttribute("username",user);
+			model.addAttribute("password",pass);
 			return "profile";	
 		}else
 			return null;
