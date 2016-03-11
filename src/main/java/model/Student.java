@@ -17,8 +17,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
-import main.java.controller.User;
-
 @Entity
 @DiscriminatorColumn(name="s")
 public class Student extends User{

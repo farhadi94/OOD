@@ -13,8 +13,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
-import main.java.controller.User;
-
 @Entity
 @DiscriminatorValue("t")
 public class Teacher extends User{
