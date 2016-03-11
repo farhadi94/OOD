@@ -3,6 +3,7 @@ package main.java.model;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -12,16 +13,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import main.java.controller.User;
+
 @Entity
-public class Teacher {
-	
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private long id;
-	
-	@OneToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="user")
-	private User user;
+@DiscriminatorValue("t")
+public class Teacher extends User{
 	
 	@Column(unique=true)
 	private Long teacherId;
@@ -31,14 +27,6 @@ public class Teacher {
 	List<CourseGroup> courseGroups;
 	
 	public Teacher() {
-	}
-	
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
 	}
 
 	public Long getTeacherId() {
