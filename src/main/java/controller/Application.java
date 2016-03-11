@@ -1,13 +1,11 @@
-package main.java.hello;
-
-import java.io.File;
-
-import main.java.controller.EduDataAnalyzer;
+package main.java.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class Application {
@@ -19,7 +17,7 @@ public class Application {
 //		EduDataAnalyzer analyzer = new EduDataAnalyzer();
 //		analyzer.parseEduData(new File("/home/saeed/workspace/OOD/sample.xlsx"));
 	}
-//
+
 //	@Bean
 //	public CommandLineRunner demo(CustomerRepository repository) {
 //		return (args) -> {
