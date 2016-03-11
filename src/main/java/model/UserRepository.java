@@ -2,6 +2,8 @@ package main.java.model;
 
 import org.springframework.data.repository.CrudRepository;
 
+import java.util.List;
+
 /**
  * Created with IntelliJ IDEA.
  * User: LGM
@@ -10,4 +12,5 @@ import org.springframework.data.repository.CrudRepository;
  */
 public interface UserRepository extends CrudRepository<User,Long>
 {
+	List<User> findByUsername(String username);
 }
