@@ -4,6 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created with IntelliJ IDEA.
  * User: LGM
@@ -26,5 +29,10 @@ public class CourseGroupService
 		if (dao.findByCourse(course.getCourse()).size()>0) return dao.findByCourse(course.getCourse()).get(0);
 		save(course);
 		return dao.findByCourse(course.getCourse()).get(0);
+	}
+
+	public ArrayList<CourseGroup> findByTeacher(Teacher teacher)
+	{
+		return dao.findByTeacher(teacher);
 	}
 }

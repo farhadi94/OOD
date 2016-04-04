@@ -4,6 +4,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -15,4 +16,6 @@ import java.util.ArrayList;
 public interface CourseGroupDao extends CrudRepository<CourseGroup, Long>
 {
 	ArrayList<CourseGroup> findByCourse(Course course);
+
+	ArrayList<CourseGroup> findByTeacher(Teacher teacher);
 }

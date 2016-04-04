@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl"
+      xmlns:th="http://www.thymeleaf.org"
+      th:include="header :: page">
+<head>
+    <title>Courses</title>
+</head>
+<body>
+<div th:fragment="content">
+    <div class="main container">
+        <div class="row">
+            <div class="col-md-10">
+                <h3> جست و جو</h3>
+                <form class="search">
+                    <div class="row"><select name="dept">
+                        <option> نام دانشکده </option>
+                        <option> کامپیوتر </option>
+                        <option> غیر کامپیوتر </option>
+                    </select> </div>
+                    <div class="row"><select name="course">
+                        <option> نام درس </option>
+                        <option> طراحی شی گرا </option>
+                    </select> </div>
+                    <div class="row">
+                        <input type="button" class="btn btn-primary btn-sm" value="بگرد"/>
+                    </div>
+                </form>
+                <hr> </hr>
+                <h3> درس های من </h3>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>نام درس</th>
+                        <th>شماره درس</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <option th:each="i : ${courses}">
+                    <tr>
+                        <td> <a href="#" th:text="${i.course.title}"></a> </td>
+                        <td th:text="${i.course.courseId}">۴۰۲۵۴</td>
+                    </tr>
+                    </option>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -18,12 +18,18 @@ public class HomeManager
 {
 	@Autowired
 	UserService userService;
+	@Autowired
+	TeacherService teacherService;
+	@Autowired
+	CourseGroupService courseGroupService;
 	@RequestMapping(value="/home", method= RequestMethod.GET)
 	public String loginForm(Model model,@CookieValue(value = "username",defaultValue = "") String username)
 	{
 		if (username.equals("")) return "redirect:/login";
 		User user=userService.findByUsername(username).get(0);
 		model.addAttribute("user",user);
-		return "header";
+		if (teacherService.findByUsername(user.getUsername()).size()>0)
+			model.addAttribute("courses",courseGroupService.findByTeacher(teacherService.findByUsername(user.getUsername()).get(0)));
+		return "courses";
 	}
 }
