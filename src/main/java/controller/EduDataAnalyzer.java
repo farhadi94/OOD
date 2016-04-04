@@ -24,10 +24,16 @@ public class EduDataAnalyzer {
 	UserService userService;
 
 	@Autowired()
+	StudentService studentService;
+
+	@Autowired()
 	TeacherService teacherService;
 
 	@Autowired()
 	CourseService courseService;
+
+	@Autowired()
+	CourseGroupService courseGroupService;
 
 	public EduDataAnalyzer() {
 		System.err.println(userService);
@@ -127,12 +133,14 @@ public class EduDataAnalyzer {
 		@Override
 		public boolean validateAndInsert()
 		{
-			User user=new User();
+			Student user=new Student();
 			user.setUsername(String.valueOf(EduStudentData.this.studentId));
 			user.setName(name);
+			user.setDepNo(depNo);
+			user.setStudentId(studentId);
 			user.setPassword(password);
 			user.setBirthDate(birthDate);
-			userService.saveIfNotExist(user);
+			studentService.saveIfNotExist(user);
 			return true;
 		}
 	}
@@ -226,7 +234,8 @@ public class EduDataAnalyzer {
 			group.setCourse(course);
 			group.setRoom(room);
 			group.setTeacher(teacherService.findByUsername(String.valueOf(teacherId)).get(0));
-
+			group.setRoom(room);
+			courseGroupService.save(group);
 			return true;
 		}
 	}

@@ -12,19 +12,19 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @Component
-public class CourseService
+public class CourseGroupService
 {
 	@Autowired
-	CourseDao dao;
-	public void save(Course course)
+	CourseGroupDao dao;
+	public void save(CourseGroup course)
 	{
 		dao.save(course);
 	}
 
-	public Course saveIfNotExist(Course course)
+	public CourseGroup saveIfNotExist(CourseGroup course)
 	{
-		if (dao.findByCourseId(course.getCourseId()).size()>0) return dao.findByCourseId(course.getCourseId()).get(0);
+		if (dao.findByCourse(course.getCourse()).size()>0) return dao.findByCourse(course.getCourse()).get(0);
 		save(course);
-		return dao.findByCourseId(course.getCourseId()).get(0);
+		return dao.findByCourse(course.getCourse()).get(0);
 	}
 }
