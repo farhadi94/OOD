@@ -11,25 +11,27 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.stereotype.Service;
 
-@Repository
+@Configurable
+@Service
 public class EduDataAnalyzer {
 	
 	private static EduDataAnalyzer instance = null;
 	
-	@Autowired
-	private UserDao userDao;
-	
-	public UserDao getUserDao() {
-		return userDao;
-	}
+	@Autowired()
+	UserService userService;
 
-	public void setUserDao(UserDao userDao) {
-		this.userDao = userDao;
-	}
+	@Autowired()
+	TeacherService teacherService;
 
-	public EduDataAnalyzer() {}
+	@Autowired()
+	CourseService courseService;
+
+	public EduDataAnalyzer() {
+		System.err.println(userService);
+	}
 	
 	public static EduDataAnalyzer getInstance() {
 		if (instance == null)
@@ -42,7 +44,7 @@ public class EduDataAnalyzer {
 		for (EduData eduData: eduDatas)
 			if (eduData.validateAndInsert() == false)
 				System.err.println("Invalid data");
-		System.err.println("COUNT: " + userDao.count());
+		System.err.println("COUNT: " + eduDatas.size());
 
 	}
 	
@@ -123,8 +125,15 @@ public class EduDataAnalyzer {
 		}
 		
 		@Override
-		public boolean validateAndInsert() {
-			return false;
+		public boolean validateAndInsert()
+		{
+			User user=new User();
+			user.setUsername(String.valueOf(EduStudentData.this.studentId));
+			user.setName(name);
+			user.setPassword(password);
+			user.setBirthDate(birthDate);
+			userService.saveIfNotExist(user);
+			return true;
 		}
 	}
 	
@@ -153,7 +162,15 @@ public class EduDataAnalyzer {
 		
 		@Override
 		public boolean validateAndInsert() {
-			return false;
+			Teacher teacher=new Teacher();
+			teacher.setUsername(String.valueOf(teacherId));
+			teacher.setName(name);
+			teacher.setPassword(password);
+			teacher.setBirthDate(birthDate);
+			teacher.setTeacherId(teacherId);
+			teacher.setDepNo(depNo);
+			teacherService.saveIfNotExist(teacher);
+			return true;
 		}
 	}
 	
@@ -201,7 +218,16 @@ public class EduDataAnalyzer {
 		
 		@Override
 		public boolean validateAndInsert() {
-			return false;
+			Course course=new Course();
+			course.setId(courseId);
+			course.setTitle(courseTitle);
+			course=courseService.saveIfNotExist(course);
+			CourseGroup group=new CourseGroup();
+			group.setCourse(course);
+			group.setRoom(room);
+			group.setTeacher(teacherService.findByUsername(String.valueOf(teacherId)).get(0));
+
+			return true;
 		}
 	}
 	

@@ -1,11 +1,7 @@
-package main.java.model;
+package main.java.controller;
 
 import java.sql.Time;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 enum DayOfWeek{
 	Saturday,
@@ -16,7 +12,7 @@ enum DayOfWeek{
 	Thursday,
 	Friday,
 }
-
+@Entity
 public class SessionTime {
 	
 	@Id

@@ -1,4 +1,4 @@
-package main.java.model;
+package main.java.controller;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,19 +9,19 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class TA {
-
+public class Topic {
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Long id;
+	private long id;
+	
+	private String title;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="student")
-	private Student student;
+	@JoinColumn(name="syllabus")
+	private Syllabus syllabus;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="courseGroup")
-	private CourseGroup courseGroup;	
+	//TODO subtopic
 	
-	public TA() {}
+	public Topic() {}
 }

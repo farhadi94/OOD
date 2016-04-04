@@ -1,23 +1,19 @@
-package main.java.model;
+package main.java.controller;
+
+import main.java.controller.CourseGroup;
+import main.java.controller.User;
 
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-
-import main.java.controller.User;
 
 @Entity
 @DiscriminatorValue("t")
-public class Teacher extends User{
+public class Teacher extends User
+{
 	
 	@Column(unique=true)
 	private Long teacherId;

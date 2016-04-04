@@ -4,8 +4,11 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,17 +18,20 @@ import java.util.List;
 @Controller
 public class RegisteryManager {
 
+	@RequestMapping(value="/", method=RequestMethod.GET)
+	public String def(Model model)
+	{
+		return "redirect:/login";
+	}
 	@RequestMapping(value="/login", method=RequestMethod.GET)
-	public String loginForm(Model model) {
-		User user=new User();
-		user.setUsername("hi");
-		user.setPassword("bye");
-		repository.save(user);
+	public String loginForm(Model model, @CookieValue(value = "username",defaultValue = "") String username) {
+		if (!username.equals(""))
+			return "redirect:/home";
 		model.addAttribute("loginFormFields", new LoginFormFields());
 		return "login";
 	}
-	@Autowired
-	UserDao repository;
+	@Autowired()
+	UserService repository;
 
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public String loginSubmit(HttpServletResponse response, @RequestParam("user") String user,@RequestParam("pass") String pass, Model model) {
@@ -34,7 +40,7 @@ public class RegisteryManager {
 			response.addCookie(new Cookie("username", user));
 			model.addAttribute("username",user);
 			model.addAttribute("password",pass);
-			return "profile";	
+			return "redirect:/login";
 		}else
 			return null;
 	}

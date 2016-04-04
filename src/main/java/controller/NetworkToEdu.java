@@ -5,6 +5,7 @@ import java.io.File;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +17,9 @@ import org.w3c.dom.NodeList;
 public class NetworkToEdu {
 	
 	private final static String CONFIG_PATH = "src/main/resources/eduConfig.xml";
-	
+
+	@Autowired
+	private EduDataAnalyzer analyzer;
 	@RequestMapping(value="/edudata", method=RequestMethod.GET)
 	public String retreiveData(Model model){
 		//TODO check currentUser is Admin
@@ -42,7 +45,7 @@ public class NetworkToEdu {
 					path= "";
 				File file = new File(path);
 				model.addAttribute("path", path);
-				EduDataAnalyzer.getInstance().parseAndInsertNewData(file);
+				analyzer.parseAndInsertNewData(file);
 //				EduDataAnalyzer.getInstance().parseAndInsertNewData(new File(list.item(0).getTextContent()));
 			}
 		}catch (Exception e){

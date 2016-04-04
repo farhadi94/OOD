@@ -1,4 +1,4 @@
-package main.java.model;
+package main.java.controller;
 
 import java.util.List;
 
@@ -40,14 +40,14 @@ public class CourseGroup {
 	@JoinColumn(name="teacher")
 	private Teacher teacher;
 	
-	@ManyToMany
+	@ManyToMany()
 	@JoinTable(
 		name="CourseGroup_SessionTime",
 		joinColumns=@JoinColumn(name="courseGroup", referencedColumnName="id"),
 		inverseJoinColumns=@JoinColumn(name="sessionTime", referencedColumnName="id"))
 	private List<SessionTime> sessionTimes;
 	
-	@ManyToMany
+	@ManyToMany()
 	@JoinTable(
 		name="CourseGroup_Student",
 		joinColumns=@JoinColumn(name="courseGroup", referencedColumnName="id"),
@@ -69,4 +69,124 @@ public class CourseGroup {
 	
 	@Enumerated(EnumType.STRING)
 	private SemesterType semesterType;
+
+	public Course getCourse()
+	{
+		return course;
+	}
+
+	public void setCourse(Course course)
+	{
+		this.course = course;
+	}
+
+	public List<Gradable> getGradables()
+	{
+		return gradables;
+	}
+
+	public void setGradables(List<Gradable> gradables)
+	{
+		this.gradables = gradables;
+	}
+
+	public Long getId()
+	{
+		return id;
+	}
+
+	public void setId(Long id)
+	{
+		this.id = id;
+	}
+
+	public List<Resource> getResources()
+	{
+		return resources;
+	}
+
+	public void setResources(List<Resource> resources)
+	{
+		this.resources = resources;
+	}
+
+	public String getRoom()
+	{
+		return room;
+	}
+
+	public void setRoom(String room)
+	{
+		this.room = room;
+	}
+
+	public SemesterType getSemesterType()
+	{
+		return semesterType;
+	}
+
+	public void setSemesterType(SemesterType semesterType)
+	{
+		this.semesterType = semesterType;
+	}
+
+	public int getSemesterYear()
+	{
+		return semesterYear;
+	}
+
+	public void setSemesterYear(int semesterYear)
+	{
+		this.semesterYear = semesterYear;
+	}
+
+	public List<SessionTime> getSessionTimes()
+	{
+		return sessionTimes;
+	}
+
+	public void setSessionTimes(List<SessionTime> sessionTimes)
+	{
+		this.sessionTimes = sessionTimes;
+	}
+
+	public List<Student> getStudents()
+	{
+		return students;
+	}
+
+	public void setStudents(List<Student> students)
+	{
+		this.students = students;
+	}
+
+	public Syllabus getSyllabus()
+	{
+		return syllabus;
+	}
+
+	public void setSyllabus(Syllabus syllabus)
+	{
+		this.syllabus = syllabus;
+	}
+
+	public List<TA> getTas()
+	{
+		return tas;
+	}
+
+	public void setTas(List<TA> tas)
+	{
+		this.tas = tas;
+	}
+
+	public Teacher getTeacher()
+	{
+		return teacher;
+	}
+
+	public void setTeacher(Teacher teacher)
+	{
+		this.teacher = teacher;
+	}
 }
